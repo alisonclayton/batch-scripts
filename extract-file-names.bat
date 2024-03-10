@@ -6,6 +6,8 @@ cd > vartemp1.txt
 set /p homedir=<vartemp1.txt
 del vartemp1.txt
 
+:menu
+cls
 echo. .: NAMES EXTRACTOR :.
 echo.
 echo =====================================================================
@@ -37,7 +39,7 @@ cls
 echo.
 echo Your output is in a file named names-docs.txt located in this directory.
 echo.
-goto end
+goto continue
 
 :2
 cls
@@ -45,7 +47,7 @@ echo.
 echo Your output:
 echo.
 dir /b
-goto end
+goto continue
 
 :3
 dir /b > %homedir%\names-docs.txt
@@ -55,7 +57,19 @@ echo This output is in a file named names-docs.txt located in this directory.
 echo.
 dir /b
 echo.
-goto end
+goto continue
+
+:continue
+echo.
+echo Press any key to continue. . .
+pause>nul
+
+cls
+echo.
+set /p repeat="Do you want to do another extract? [y/n]: "
+echo.
+if %repeat%==y goto menu
+if %repeat%==n goto end
 
 :end
 echo.
