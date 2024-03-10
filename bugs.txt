@@ -1,0 +1,7 @@
+BUGS
+
+#1 When it is typed space  in the output type choice section, the instance is closed.
+
+#2 When it is typed space  in the another extract choice section, the instance is closed.
+
+#3 When any random key sequence is typed in the directory selection section, the following message in English is displayed: "O sistema não pode encontrar o caminho especificado.", as a result of attempting to execute the cd command trying use the random key sequence as directory path. This output message has its language defined by the user system when it should be determined by the script code.

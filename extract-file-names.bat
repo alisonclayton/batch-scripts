@@ -15,8 +15,25 @@ echo. Please, enter the absolute directory path to extract name files!
 echo =====================================================================
 echo.
 set /p opdir=Directory:
-cd %opdir%
+if not defined opdir goto menu
 
+cd %opdir% 
+
+cd > vartemp2.txt
+set /p atualdir=<vartemp2.txt
+del vartemp2.txt
+
+if %atualdir% NEQ %homedir% goto choseoutput
+
+echo.
+echo Invalid option, press any key to try again. . .
+pause>nul
+goto menu
+
+rem echo %atualdir%
+rem pause>nul
+
+:choseoutput
 cls
 echo.
 echo =====================================================================
@@ -29,9 +46,16 @@ echo =====================================================================
 echo.
 set /p opoutput=Output type:
 echo.
+if not defined opoutput goto choseoutput
 if %opoutput%==1 goto 1
 if %opoutput%==2 goto 2
-if %opoutput%==3 goto 3
+if %opoutput%==3 goto 3 else goto backchoseoutput
+
+:backchoseoutput
+echo.
+echo Invalid option, press any key to try again. . .
+pause>nul
+goto choseoutput
 
 :1
 dir /b > %homedir%\names-docs.txt
@@ -64,12 +88,20 @@ echo.
 echo Press any key to continue. . .
 pause>nul
 
+:chosecontinue
 cls
 echo.
 set /p repeat="Do you want to do another extract? [y/n]: "
 echo.
+if not defined repeat goto chosecontinue
 if %repeat%==y goto menu
-if %repeat%==n goto end
+if %repeat%==n goto end else goto bkchosecontinue
+
+:bkchosecontinue
+echo. 
+echo Invalid option, press any key to try again. . .
+pause>nul
+goto chosecontinue
 
 :end
 echo.
