@@ -1,4 +1,4 @@
-@echo off
+rem @echo off
 color 0a
 cls
 
@@ -8,7 +8,7 @@ del vartemp1.txt
 
 :menu
 cls
-echo. .: NAMES EXTRACTOR :.
+Title NAMES EXTRACTOR
 echo.
 echo =====================================================================
 echo. Please, enter the absolute directory path to extract name files!
@@ -35,6 +35,8 @@ rem pause>nul
 
 :choseoutput
 cls
+set /p opoutput=0
+%opoutput%
 echo.
 echo =====================================================================
 echo. What output type do you prefere?
@@ -46,6 +48,8 @@ echo =====================================================================
 echo.
 set /p opoutput=Output type:
 echo.
+%opoutput%
+pause>nul
 if not defined opoutput goto choseoutput
 if %opoutput%==1 goto 1
 if %opoutput%==2 goto 2
