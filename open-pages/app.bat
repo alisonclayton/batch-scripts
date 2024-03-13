@@ -71,17 +71,35 @@ echo.
 set /p url=URL:
 if not defined url goto saveURL
 echo %url% >> urls.txt
-echo URL save successfully!
-echo.
 
-set /p savenew="Do you want to save new URL? [y/n]: "
+:savenewask
+cls
+echo.
+echo. - press space+enter to exit -
+echo. 
+echo URL %url%
+echo save successfully!
+echo.
+echo Do you want to save new URL? [y/n]
+echo. 
+set /p savenew="n go back to the menu: "
+if not defined savenew goto savenewask
 if %savenew%==y goto saveURL
 if %savenew%==n goto startmenu 
 
-set globalbk=saveURL
+set globalbk=savenewask
 goto invalideop
 
 :listURL
+cls
+echo.
+echo "URLs LIST"
+echo.
+set /a numero=1
+for /f "delims=" %%i in ('type urls.txt') do (echo %%i) 
+
+set globalfw=startmenu
+goto forward
 
 :deleteURL
 
